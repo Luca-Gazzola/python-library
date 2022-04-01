@@ -1,16 +1,15 @@
-from turtle import left
-from tree_base import *
+from tree_bst import *
 
-class AVLTree(BaseTree):
-    """An AVL Tree that inherits from the Base Tree (BST) class. Self-balances as you
+class AVLTree(TreeBST):
+    """An AVL Tree that inherits from the Tree BST class. Self-balances as you
     insert and remove to ensure faster access times.
     """
     # Class Structs
-    class Node(BaseTree.Node):
-        """An AVL Node that inherits from the Base Tree (BST) class. Has additional
+    class Node(TreeBST.Node):
+        """An AVL Node that inherits from the Tree BST class. Has additional
         structural data to allow for AVL operations.
         """
-        # Use BaseTree.Node as our basis, add AVL specific fields
+        # Use TreeBST.Node as our basis, add AVL specific fields
         def __init__(self, value=None, left=None, right=None, balance_factor=None, height=None) -> None:
             super().__init__(value, left, right)
             self.balance_factor = balance_factor

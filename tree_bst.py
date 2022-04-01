@@ -1,9 +1,9 @@
 from enum import IntEnum
 from exception_tree import TreeException
     
-class BaseTree(object):
+class TreeBST(object):
     """The base tree meant to be inherited from by other Binary Search Tree related
-    structures (e.g. Red-Black or AVL). This Struct, while called BaseTree, is still
+    structures (e.g. Red-Black or AVL). This Struct, while called TreeBST, is still
     a BST by itself and will work already.
 
     Raises:
@@ -45,7 +45,7 @@ class BaseTree(object):
         self.__null_node__ = self.Node()
     
     # Comparison Operators
-    def __eq__(self, other: 'BaseTree') -> bool:
+    def __eq__(self, other: 'TreeBST') -> bool:
         # Equality based on whether self and other tree have the exact same structure
         def dfs(this_node: self.Node, other_node: self.Node) -> bool:
             # Accept when None case has been reached
@@ -67,13 +67,13 @@ class BaseTree(object):
         # Iterate through tree until value is found
         return self.__find_node__(value) != self.__null_node__
     
-    def similar(self, other: 'BaseTree') -> bool:
+    def similar(self, other: 'TreeBST') -> bool:
         """Whether two trees are similar based on the values. This will perform an
         inorder traversal on both trees to ensure that they contains the same values
         only.
 
         Args:
-            other (BaseTree): Tree to compare to.
+            other (TreeBST): Tree to compare to.
 
         Returns:
             bool: Result of whether both trees contain the same value
