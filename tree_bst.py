@@ -35,6 +35,9 @@ class TreeBST(object):
             self.left = left
             self.right = right
     
+    # Class Members
+    __null_node__ = Node()
+    
     # Constructor
     def __init__(self) -> None:
         # Public
@@ -42,7 +45,6 @@ class TreeBST(object):
         
         # Private
         self.__root__ = None
-        self.__null_node__ = self.Node()
     
     # Comparison Operators
     def __eq__(self, other: 'TreeBST') -> bool:
