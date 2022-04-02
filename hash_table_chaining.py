@@ -31,9 +31,6 @@ class HashTableSC(HashTableBase):
 
         # If nothing found, raise not found exception
         raise HashException(self.__class__.__name__, f"{key} was not found, could not retrive value.")
-    
-    def __setitem__(self, key: object, value: object) -> None:
-        self.insert(key, value)
         
     # Public Method
     def insert(self, key: object, value: object) -> None:
