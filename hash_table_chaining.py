@@ -3,11 +3,28 @@ from hash_table_base import *
 class HashTableSC(HashTableBase):
     # Class Structs
     class TableEntry(HashTableBase.TableEntry):
+        """Modified TableEntry that stores nodes of a linked list (ListNode)
+        """
         def __init__(self, node: 'ListNode' = None) -> None:
+            """Constructor that sets the head of the linked list.
+
+            Args:
+                node (ListNode, optional): The head of a linked list. Defaults to None.
+            """
             self.node = node
         
     class ListNode(object):
-        def __init__(self, key=None, value=None, prev=None, next=None) -> None:
+        """Structure to hold the key-value pairs, represented as a doubly linked list.
+        """
+        def __init__(self, key: object = None, value: object = None, prev: 'ListNode' = None, next: 'ListNode' = None) -> None:
+            """Constructor that sets the key-value pair, and the two ends of the doubly linked list.
+
+            Args:
+                key (object, optional): Key to be used for hashing. Defaults to None.
+                value (object, optional): Value paired to the given key. Defaults to None.
+                prev (ListNode, optional): Previous ListNode in the linked list. Defaults to None.
+                next (ListNode, optional): Next ListNode in the linked list. Defaults to None.
+            """
             self.key = key
             self.value = value
             self.next = None
