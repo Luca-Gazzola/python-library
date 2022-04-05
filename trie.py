@@ -1,5 +1,4 @@
 from exception_trie import TrieException
-from warnings import warn
 
 class Trie(object):
     """A tree-like data structure that contains words/strings. They are
