@@ -1,4 +1,5 @@
 from collections import deque
+import math
 
 class Graph(object):
     # Static Public methods
@@ -43,7 +44,40 @@ class Graph(object):
         Returns:
             list[int]: Returns shortest path found, otherwise returns None if no path exists.
         """
-        pass
+        # len(graph) == # of vertices/nodes in graph
+        # Set necessary info for weights, prepare queue
+        distance = [math.inf for _ in range(len(graph))]
+        previous = [None for _ in range(len(graph))]
+        queue = deque([*range(len(graph))])
+        distance[start] = 0
+        
+        # Iterate through queue and find MST
+        while queue:
+            # Grab next closest node
+            node = Graph.__min_distance__(distance, queue)
+            
+            # Check if we're at our destination
+            if node == end:
+                stack = deque()
+                if previous[node] or node == start:
+                    while node:
+                        stack.appendleft(node)
+                        node = previous[node]
+                    stack.appendleft(start)
+                return list(stack)
+            
+            # Otherwise remove node from queue and keep going
+            queue.remove(node)
+            
+            # For all neighbors of current node
+            for neighbor, weight in enumerate(graph[node]):
+                if weight > 0:
+                    path_distance = distance[node] + graph[node][neighbor]
+                    if path_distance < distance[neighbor]:
+                        distance[neighbor] = path_distance
+                        previous[neighbor] = node
+        
+        return None
     
     @staticmethod
     def dijkstra_pq(graph: 'list[list[int]]', start: int, end: int) -> 'list[int]':
@@ -185,7 +219,17 @@ class Graph(object):
     @staticmethod
     def __dfs_matrix_traverse__(graph: 'list[list[int]]', end: int, node: int, path: 'list[int]') -> 'list[int]':
         pass
+    
+    @staticmethod
+    def __min_distance__(distance: 'list[float]', queue: 'list[int]'):
+        running_min = math.inf
+        min_node = -1
+        for node in queue:
+            if distance[node] < running_min:
+                running_min = distance[node]
+                min_node = node
         
+        return min_node
 
 if __name__ == '__main__':
     adj_list = [[1,4], [0,2], [1,3], [2,4], [0,3]]
@@ -237,3 +281,12 @@ if __name__ == '__main__':
     print(dfs_list)
     dfs_mat = Graph.dfs_traverse(adj_mat, 0, 2, False)
     print(dfs_mat)
+    print()
+    
+    print("Checking Dijkstra's with non-weighted graph")
+    djk = Graph.dijkstra(adj_mat, 0, 2)
+    print(djk)
+    
+    print("Checking Dijkstra's with weighted graph")
+    djk_w = Graph.dijkstra(weighted_adj_mat, 0, 4)
+    print(djk_w)
