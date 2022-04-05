@@ -60,7 +60,7 @@ class Trie(object):
         Returns:
             str: All words found in the Trie (that are null-terminated).
         """
-        def dfs(node: 'Node', path: str) -> 'list[str]':
+        def dfs(node: 'self.Node', path: str) -> 'list[str]':
             # If we reached the end of this branch, save word
             if node.is_terminal:
                 return [path]
