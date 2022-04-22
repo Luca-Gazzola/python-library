@@ -91,8 +91,8 @@ class Trie(object):
             TrieException: Raised if the string given is an invalid type.
         """
         # Check if valid string
-        if not string or string is not str:
-            raise TrieException(__class__.__name__, "String can't be inserted, incorrect type.")
+        if not string or not isinstance(string, str):
+            raise TrieException(__class__.__name__, f"String can't be inserted, incorrect type -> {string}: {type(string)}")
         
         # Start at head and check if index is taken
         node = self.__head__
@@ -124,8 +124,8 @@ class Trie(object):
             TrieException: Raised if the string given is an invalid type.
         """
         # Check if valid string
-        if not string or string is not str:
-            raise TrieException(__class__.__name__, "String can't be removed, given string is of incorrect type.")
+        if not string or not isinstance(string, str):
+            raise TrieException(__class__.__name__, f"String can't be removed, given string is of incorrect type. -> {string}: {type(string)}")
   
         # Call recursive remove method
         self.__remove__(self.__head__, string)
